@@ -3,28 +3,235 @@
   "chapters": [
     {
       "startTime": 0,
-      "title": "Introduction",
-      "img": "https://via.placeholder.com/400x400.png?text=Chapter+1"
+      "title": "Track 01"
     },
     {
-      "startTime": 600,
-      "title": "Part 1: Foundation Teachings",
-      "img": "https://via.placeholder.com/400x400.png?text=Chapter+2"
+      "startTime": 70,
+      "title": "Track 02"
     },
     {
-      "startTime": 1800,
-      "title": "Part 2: Spiritual Understanding",
-      "img": "https://via.placeholder.com/400x400.png?text=Chapter+3"
+      "startTime": 595,
+      "title": "Track 03"
     },
     {
-      "startTime": 3600,
-      "title": "Part 3: Practical Application",
-      "img": "https://via.placeholder.com/400x400.png?text=Chapter+4"
+      "startTime": 1256,
+      "title": "Track 04"
     },
     {
-      "startTime": 5400,
-      "title": "Conclusion",
-      "img": "https://via.placeholder.com/400x400.png?text=Chapter+5"
+      "startTime": 2457,
+      "title": "Track 05"
+    },
+    {
+      "startTime": 3507,
+      "title": "Track 06"
+    },
+    {
+      "startTime": 4302,
+      "title": "Track 07"
+    },
+    {
+      "startTime": 5268,
+      "title": "Track 08"
+    },
+    {
+      "startTime": 5934,
+      "title": "Track 09"
+    },
+    {
+      "startTime": 6519,
+      "title": "Track 10"
+    },
+    {
+      "startTime": 6884,
+      "title": "Track 11"
+    },
+    {
+      "startTime": 7664,
+      "title": "Track 12"
+    },
+    {
+      "startTime": 8245,
+      "title": "Track 13"
+    },
+    {
+      "startTime": 8990,
+      "title": "Track 14"
+    },
+    {
+      "startTime": 10296,
+      "title": "Track 15"
+    },
+    {
+      "startTime": 10927,
+      "title": "Track 16"
+    },
+    {
+      "startTime": 11582,
+      "title": "Track 17"
+    },
+    {
+      "startTime": 12162,
+      "title": "Track 18"
+    },
+    {
+      "startTime": 12742,
+      "title": "Track 19"
+    },
+    {
+      "startTime": 13013,
+      "title": "Track 20"
+    },
+    {
+      "startTime": 13898,
+      "title": "Track 21"
+    },
+    {
+      "startTime": 14394,
+      "title": "Track 22"
+    },
+    {
+      "startTime": 14644,
+      "title": "Track 23"
+    },
+    {
+      "startTime": 15255,
+      "title": "Track 24"
+    },
+    {
+      "startTime": 15955,
+      "title": "Track 25"
+    },
+    {
+      "startTime": 16885,
+      "title": "Track 26"
+    },
+    {
+      "startTime": 17190,
+      "title": "Track 27"
+    },
+    {
+      "startTime": 18151,
+      "title": "Track 28"
+    },
+    {
+      "startTime": 18521,
+      "title": "Track 29"
+    },
+    {
+      "startTime": 20052,
+      "title": "Track 30"
+    },
+    {
+      "startTime": 20862,
+      "title": "Track 31"
+    },
+    {
+      "startTime": 21372,
+      "title": "Track 32"
+    },
+    {
+      "startTime": 22452,
+      "title": "Track 33"
+    },
+    {
+      "startTime": 23123,
+      "title": "Track 34"
+    },
+    {
+      "startTime": 23828,
+      "title": "Track 35"
+    },
+    {
+      "startTime": 25379,
+      "title": "Track 36"
+    },
+    {
+      "startTime": 25539,
+      "title": "Track 37"
+    },
+    {
+      "startTime": 26094,
+      "title": "Track 38"
+    },
+    {
+      "startTime": 27314,
+      "title": "Track 39"
+    },
+    {
+      "startTime": 28320,
+      "title": "Track 40"
+    },
+    {
+      "startTime": 28956,
+      "title": "Track 41"
+    },
+    {
+      "startTime": 29547,
+      "title": "Track 42"
+    },
+    {
+      "startTime": 30157,
+      "title": "Track 43"
+    },
+    {
+      "startTime": 30912,
+      "title": "Track 44"
+    },
+    {
+      "startTime": 31593,
+      "title": "Track 45"
+    },
+    {
+      "startTime": 32198,
+      "title": "Track 46"
+    },
+    {
+      "startTime": 32964,
+      "title": "Track 47"
+    },
+    {
+      "startTime": 33264,
+      "title": "Track 48"
+    },
+    {
+      "startTime": 34110,
+      "title": "Track 49"
+    },
+    {
+      "startTime": 35160,
+      "title": "Track 50"
+    },
+    {
+      "startTime": 35731,
+      "title": "Track 51"
+    },
+    {
+      "startTime": 36546,
+      "title": "Track 52"
+    },
+    {
+      "startTime": 37217,
+      "title": "Track 53"
+    },
+    {
+      "startTime": 38002,
+      "title": "Track 54"
+    },
+    {
+      "startTime": 38618,
+      "title": "Track 55"
+    },
+    {
+      "startTime": 39443,
+      "title": "Track 56"
+    },
+    {
+      "startTime": 40103,
+      "title": "Track 57"
+    },
+    {
+      "startTime": 41393,
+      "title": "Track 58"
     }
   ]
 }
