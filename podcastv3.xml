@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Manik Private Podcast</title>
+    <description>Private podcast collection for personal listening</description>
+    <link>https://mukul23.github.io/test-podcast/</link>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 06 Jul 2025 00:00:00 GMT</lastBuildDate>
+    <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://mukul23.github.io/test-podcast/podcastv3.xml" rel="self" type="application/rss+xml" />
+    
+    <!-- iTunes Channel Tags -->
+    <itunes:author>Manik</itunes:author>
+    <itunes:summary>Private podcast collection for personal listening</itunes:summary>
+    <itunes:image href="https://via.placeholder.com/1400x1400.png?text=Manik+Private+Podcast" />
+    <itunes:category text="Technology" />
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    
+    <item>
+      <title>Dada Bhagwan - Gyanvani 3</title>
+      <description>Spiritual teachings and wisdom from Dada Bhagwan</description>
+      <link>https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&amp;st=1y6n15rx&amp;dl=1</link>
+      <guid isPermaLink="false">dada-bhagwan-gyanvani-3</guid>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+      <enclosure url="https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&amp;st=1y6n15rx&amp;dl=1" type="audio/mpeg" length="690706550" />
+      <itunes:duration>72:15:30</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>Spiritual teachings and wisdom from Dada Bhagwan</itunes:summary>
+    </item>
+    
+    <item>
+      <title>History of Apple&apos;s Command Key</title>
+      <description>The fascinating story behind Apple&apos;s iconic Command key and its origins</description>
+      <link>https://mukul23.github.io/test-podcast/apple-command-key.mp3</link>
+      <guid isPermaLink="false">apple-command-key</guid>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+      <enclosure url="https://mukul23.github.io/test-podcast/apple-command-key.mp3" type="audio/mpeg" length="17342503" />
+      <itunes:duration>00:18:07</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>The fascinating story behind Apple&apos;s iconic Command key and its origins</itunes:summary>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manik Private Podcast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .rss-link {
+            display: inline-block;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .rss-link:hover {
+            background-color: #e55a00;
+        }
+        .episode {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .admin-section {
+            background-color: #f8f9fa;
+            border: 2px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .admin-toggle {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .admin-toggle:hover {
+            background-color: #0056b3;
+        }
+        .admin-content {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 60px;
+            resize: vertical;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        .progress {
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            padding: 3px;
+            margin: 10px 0;
+            display: none;
+        }
+        .progress-bar {
+            background-color: #007bff;
+            height: 20px;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.3s;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-size: 12px;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .admin-tabs {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-right: 10px;
+        }
+        .tab-btn.active {
+            border-bottom-color: #007bff;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .tab-btn:hover {
+            background-color: #f8f9fa;
+        }
+        .tab-content {
+            margin-top: 20px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-dialog {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .auth-input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .auth-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .auth-btn:hover {
+            background-color: #0056b3;
+        }
+        .auth-error {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
+        .protected-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-dialog">
+            <h2>🔒 Private Access Required</h2>
+            <p>This is a private podcast collection. Please enter the access code:</p>
+            <input type="password" class="auth-input" id="passwordInput" placeholder="Enter password">
+            <button class="auth-btn" onclick="checkPassword()">Access Podcast</button>
+            <div class="auth-error" id="authError">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
+    <div class="container protected-content" id="mainContent">
+        <h1>Manik Private Podcast</h1>
+        
+        <p>Welcome to Manik's private podcast collection - a curated selection of personal content.</p>
+        
+        <a href="podcastv3.xml" class="rss-link">🔗 Subscribe to RSS Feed</a>
+        
+        <div class="admin-section">
+            <button class="admin-toggle" onclick="toggleAdmin()">⚙️ Manage Episodes</button>
+            <div class="admin-content" id="adminContent">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="showTab('add')">➕ Add Episode</button>
+                    <button class="tab-btn" onclick="showTab('remove')">🗑️ Remove Episode</button>
+                </div>
+                
+                <div id="addTab" class="tab-content">
+                    <h3>Add New Episode</h3>
+                    <form onsubmit="addEpisode(event)">
+                        <div class="form-group">
+                            <label for="episodeTitle">Episode Title:</label>
+                            <input type="text" id="episodeTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="episodeDescription">Description:</label>
+                            <textarea id="episodeDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cloudUrl">Dropbox/OneDrive URL:</label>
+                            <input type="url" id="cloudUrl" placeholder="Paste your Dropbox or OneDrive sharing link" required>
+                        </div>
+                        <button type="submit" class="btn">Add Episode</button>
+                        <button type="button" class="btn btn-secondary" onclick="previewDirectLink()">Preview Direct Link</button>
+                    </form>
+                </div>
+                
+                <div id="removeTab" class="tab-content" style="display: none;">
+                    <h3>Remove Episode</h3>
+                    <div class="form-group">
+                        <label for="episodeSelect">Select Episode to Remove:</label>
+                        <select id="episodeSelect" required>
+                            <option value="">Choose an episode...</option>
+                            <option value="dada-bhagwan-gyanvani-3">Dada Bhagwan - Gyanvani 3</option>
+                            <option value="apple-command-key">History of Apple's Command Key</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="confirmRemoval" required>
+                            I confirm I want to remove this episode
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="removeEpisode()">Remove Episode</button>
+                    <button type="button" class="btn btn-secondary" onclick="refreshEpisodeList()">Refresh List</button>
+                </div>
+                
+                <div class="progress" id="progress">
+                    <div class="progress-bar" id="progressBar">0%</div>
+                </div>
+                
+                <div class="status" id="status"></div>
+                
+                <div id="directLinkPreview" style="margin-top: 15px; display: none;">
+                    <h4>Direct Link Preview:</h4>
+                    <code id="directLinkText"></code>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Latest Episodes</h2>
+        
+        <div class="episode">
+            <h3>Dada Bhagwan - Gyanvani 3</h3>
+            <p>Spiritual teachings and wisdom from Dada Bhagwan</p>
+            <audio controls>
+                <source src="https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&st=1y6n15rx&dl=1" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <div class="episode">
+            <h3>History of Apple's Command Key</h3>
+            <p>The fascinating story behind Apple's iconic Command key and its origins</p>
+            <audio controls>
+                <source src="apple-command-key.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <hr>
+        
+        <p><small>To subscribe to this podcast, copy this RSS feed URL into your podcast app:</small></p>
+        <p><code>https://mukul23.github.io/test-podcast/podcastv3.xml</code></p>
+        
+        <hr>
+        <p><small style="color: #666;">Version: v9.1</small></p>
+    </div>
+
+    <script>
+        const correctHash = '47c7ef';
+        async function simpleHash(str) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const fullHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return fullHash.substring(0, 6);
+        }
+        
+        async function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const hash = await simpleHash(password);
+            
+            if (hash === correctHash) {
+                document.getElementById('authOverlay').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                sessionStorage.setItem('podcast_auth', 'true');
+            } else {
+                document.getElementById('authError').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+        
+        window.onload = function() {
+            if (sessionStorage.getItem('podcast_auth') === 'true') {
+                document.getElementById('authOverlay').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }
+            
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+        };
+        
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+
+        function toggleAdmin() {
+            const content = document.getElementById('adminContent');
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showTab(tabName) {
+            document.getElementById('addTab').style.display = 'none';
+            document.getElementById('removeTab').style.display = 'none';
+            
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            
+            if (tabName === 'add') {
+                document.getElementById('addTab').style.display = 'block';
+                tabBtns[0].classList.add('active');
+            } else if (tabName === 'remove') {
+                document.getElementById('removeTab').style.display = 'block';
+                tabBtns[1].classList.add('active');
+            }
+        }
+
+        function convertToDirectLink(url) {
+            if (url.includes('dropbox.com')) {
+                return url.replace(/[?&]dl=0/, '&dl=1').replace(/[?&]dl=1/, '&dl=1');
+            }
+            
+            if (url.includes('1drv.ms') || url.includes('onedrive.live.com')) {
+                const separator = url.includes('?') ? '&' : '?';
+                return url + separator + 'download=1';
+            }
+            
+            return url;
+        }
+
+        function previewDirectLink() {
+            const url = document.getElementById('cloudUrl').value;
+            if (!url) {
+                showStatus('Please enter a URL first', 'error');
+                return;
+            }
+
+            const directLink = convertToDirectLink(url);
+            document.getElementById('directLinkText').textContent = directLink;
+            document.getElementById('directLinkPreview').style.display = 'block';
+            
+            if (directLink === url) {
+                showStatus('URL format not recognized. Supported: Dropbox, OneDrive', 'error');
+            } else {
+                showStatus('Direct link generated successfully!', 'success');
+            }
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+
+        function updateProgress(percentage, text) {
+            const progress = document.getElementById('progress');
+            const progressBar = document.getElementById('progressBar');
+            
+            progress.style.display = 'block';
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = text;
+            
+            if (percentage >= 100) {
+                setTimeout(() => {
+                    progress.style.display = 'none';
+                }, 2000);
+            }
+        }
+
+        function addEpisode(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('episodeTitle').value;
+            const description = document.getElementById('episodeDescription').value;
+            const url = document.getElementById('cloudUrl').value;
+            
+            updateProgress(20, 'Converting URL...');
+            
+            setTimeout(() => {
+                const directLink = convertToDirectLink(url);
+                updateProgress(40, 'Generating RSS XML...');
+                
+                setTimeout(() => {
+                    const rssXml = generateRSSXML(title, description, directLink);
+                    updateProgress(60, 'Creating episode HTML...');
+                    
+                    setTimeout(() => {
+                        const episodeHtml = generateEpisodeHTML(title, description, directLink);
+                        updateProgress(80, 'Preparing download...');
+                        
+                        setTimeout(() => {
+                            downloadUpdatedFiles(rssXml, episodeHtml);
+                            updateProgress(100, 'Complete!');
+                            showStatus('Episode generated! Download the updated files and upload them to GitHub.', 'success');
+                            
+                            document.getElementById('episodeTitle').value = '';
+                            document.getElementById('episodeDescription').value = '';
+                            document.getElementById('cloudUrl').value = '';
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }, 500);
+        }
+
+        function generateRSSXML(title, description, directLink) {
+            const currentDate = new Date().toUTCString();
+            const guid = title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            
+            return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Manik Private Podcast</title>
+    <description>Private podcast collection for personal listening</description>
+    <link>https://mukul23.github.io/test-podcast/</link>
+    <language>en-US</language>
+    <lastBuildDate>${currentDate}</lastBuildDate>
+    <pubDate>${currentDate}</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://mukul23.github.io/test-podcast/podcastv3.xml" rel="self" type="application/rss+xml" />
+    
+    <itunes:author>Manik</itunes:author>
+    <itunes:summary>Private podcast collection for personal listening</itunes:summary>
+    <itunes:image href="https://via.placeholder.com/1400x1400.png?text=Manik+Private+Podcast" />
+    <itunes:category text="Technology" />
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    
+    <item>
+      <title>${title}</title>
+      <description>${description}</description>
+      <link>${directLink}</link>
+      <guid isPermaLink="false">${guid}</guid>
+      <pubDate>${currentDate}</pubDate>
+      <enclosure url="${directLink}" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>${description}</itunes:summary>
+    </item>
+    
+    <item>
+      <title>Dada Bhagwan - Gyanvani 3</title>
+      <description>Spiritual teachings and wisdom from Dada Bhagwan</description>
+      <link>https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&amp;st=1y6n15rx&amp;dl=1</link>
+      <guid isPermaLink="false">dada-bhagwan-gyanvani-3</guid>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+      <enclosure url="https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&amp;st=1y6n15rx&amp;dl=1" type="audio/mpeg" length="690706550" />
+      <itunes:duration>72:15:30</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>Spiritual teachings and wisdom from Dada Bhagwan</itunes:summary>
+    </item>
+    
+    <item>
+      <title>History of Apple&apos;s Command Key</title>
+      <description>The fascinating story behind Apple&apos;s iconic Command key and its origins</description>
+      <link>https://mukul23.github.io/test-podcast/apple-command-key.mp3</link>
+      <guid isPermaLink="false">apple-command-key</guid>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+      <enclosure url="https://mukul23.github.io/test-podcast/apple-command-key.mp3" type="audio/mpeg" length="17342503" />
+      <itunes:duration>00:18:07</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>The fascinating story behind Apple&apos;s iconic Command key and its origins</itunes:summary>
+    </item>
+  </channel>
+</rss>`;
+        }
+
+        function generateEpisodeHTML(title, description, directLink) {
+            return `        <div class="episode">
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <audio controls>
+                <source src="${directLink}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>`;
+        }
+
+        function downloadUpdatedFiles(rssXml, episodeHtml) {
+            const rssBlob = new Blob([rssXml], { type: 'application/xml' });
+            const rssUrl = URL.createObjectURL(rssBlob);
+            const rssLink = document.createElement('a');
+            rssLink.href = rssUrl;
+            rssLink.download = 'podcastv3.xml';
+            rssLink.click();
+            
+            setTimeout(() => {
+                const htmlBlob = new Blob([episodeHtml], { type: 'text/html' });
+                const htmlUrl = URL.createObjectURL(htmlBlob);
+                const htmlLink = document.createElement('a');
+                htmlLink.href = htmlUrl;
+                htmlLink.download = 'new-episode.html';
+                htmlLink.click();
+            }, 1000);
+        }
+
+        function removeEpisode() {
+            const selectedEpisode = document.getElementById('episodeSelect').value;
+            const confirmRemoval = document.getElementById('confirmRemoval').checked;
+            
+            if (!selectedEpisode) {
+                showStatus('Please select an episode to remove', 'error');
+                return;
+            }
+            
+            if (!confirmRemoval) {
+                showStatus('Please confirm the removal by checking the checkbox', 'error');
+                return;
+            }
+            
+            updateProgress(20, 'Preparing removal...');
+            
+            setTimeout(() => {
+                updateProgress(40, 'Generating updated RSS...');
+                
+                setTimeout(() => {
+                    const updatedRssXml = generateUpdatedRSSWithoutEpisode(selectedEpisode);
+                    updateProgress(60, 'Creating updated HTML...');
+                    
+                    setTimeout(() => {
+                        const updatedHtml = generateUpdatedHTMLWithoutEpisode(selectedEpisode);
+                        updateProgress(80, 'Preparing download...');
+                        
+                        setTimeout(() => {
+                            downloadUpdatedFiles(updatedRssXml, updatedHtml);
+                            updateProgress(100, 'Complete!');
+                            showStatus('Episode removed! Download the updated files and upload them to GitHub.', 'success');
+                            
+                            document.getElementById('episodeSelect').value = '';
+                            document.getElementById('confirmRemoval').checked = false;
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }, 500);
+        }
+
+        function generateUpdatedRSSWithoutEpisode(episodeToRemove) {
+            const currentDate = new Date().toUTCString();
+            
+            let episodes = [];
+            
+            if (episodeToRemove !== 'dada-bhagwan-gyanvani-3') {
+                episodes.push(`    <item>
+      <title>Dada Bhagwan - Gyanvani 3</title>
+      <description>Spiritual teachings and wisdom from Dada Bhagwan</description>
+      <link>https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&amp;st=1y6n15rx&amp;dl=1</link>
+      <guid isPermaLink="false">dada-bhagwan-gyanvani-3</guid>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+      <enclosure url="https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&amp;st=1y6n15rx&amp;dl=1" type="audio/mpeg" length="690706550" />
+      <itunes:duration>72:15:30</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>Spiritual teachings and wisdom from Dada Bhagwan</itunes:summary>
+    </item>`);
+            }
+            
+            if (episodeToRemove !== 'apple-command-key') {
+                episodes.push(`    <item>
+      <title>History of Apple&apos;s Command Key</title>
+      <description>The fascinating story behind Apple&apos;s iconic Command key and its origins</description>
+      <link>https://mukul23.github.io/test-podcast/apple-command-key.mp3</link>
+      <guid isPermaLink="false">apple-command-key</guid>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+      <enclosure url="https://mukul23.github.io/test-podcast/apple-command-key.mp3" type="audio/mpeg" length="17342503" />
+      <itunes:duration>00:18:07</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:summary>The fascinating story behind Apple&apos;s iconic Command key and its origins</itunes:summary>
+    </item>`);
+            }
+            
+            return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Manik Private Podcast</title>
+    <description>Private podcast collection for personal listening</description>
+    <link>https://mukul23.github.io/test-podcast/</link>
+    <language>en-US</language>
+    <lastBuildDate>${currentDate}</lastBuildDate>
+    <pubDate>${currentDate}</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://mukul23.github.io/test-podcast/podcastv3.xml" rel="self" type="application/rss+xml" />
+    
+    <itunes:author>Manik</itunes:author>
+    <itunes:summary>Private podcast collection for personal listening</itunes:summary>
+    <itunes:image href="https://via.placeholder.com/1400x1400.png?text=Manik+Private+Podcast" />
+    <itunes:category text="Technology" />
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    
+${episodes.join('\n    \n')}
+  </channel>
+</rss>`;
+        }
+
+        function generateUpdatedHTMLWithoutEpisode(episodeToRemove) {
+            let episodes = [];
+            
+            if (episodeToRemove !== 'dada-bhagwan-gyanvani-3') {
+                episodes.push(`        <div class="episode">
+            <h3>Dada Bhagwan - Gyanvani 3</h3>
+            <p>Spiritual teachings and wisdom from Dada Bhagwan</p>
+            <audio controls>
+                <source src="https://www.dropbox.com/scl/fi/opo4yekjw91hzsn437or9/Dada-Bhagwan-Gyanvani-3.mp3?rlkey=229392mnemsivnamoxrir9zpn&st=1y6n15rx&dl=1" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>`);
+            }
+            
+            if (episodeToRemove !== 'apple-command-key') {
+                episodes.push(`        <div class="episode">
+            <h3>History of Apple's Command Key</h3>
+            <p>The fascinating story behind Apple's iconic Command key and its origins</p>
+            <audio controls>
+                <source src="apple-command-key.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>`);
+            }
+            
+            return episodes.join('\n        \n');
+        }
+
+        function refreshEpisodeList() {
+            showStatus('Episode list refreshed! Current episodes are shown in the dropdown.', 'success');
+        }
+    </script>
+</body>
+</html>
