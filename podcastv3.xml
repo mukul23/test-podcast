@@ -33,6 +33,7 @@
       <itunes:episodeType>full</itunes:episodeType>
       <itunes:explicit>false</itunes:explicit>
       <itunes:summary>Spiritual teachings and wisdom from Dada Bhagwan</itunes:summary>
+      <podcast:chapters url="https://mukul23.github.io/test-podcast/chapters-dada-gyanvani-3.json" type="application/json" />
     </item>
     
     <item>

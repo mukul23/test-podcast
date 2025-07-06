@@ -1,0 +1,30 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Introduction",
+      "img": "https://via.placeholder.com/400x400.png?text=Chapter+1"
+    },
+    {
+      "startTime": 600,
+      "title": "Part 1: Foundation Teachings",
+      "img": "https://via.placeholder.com/400x400.png?text=Chapter+2"
+    },
+    {
+      "startTime": 1800,
+      "title": "Part 2: Spiritual Understanding",
+      "img": "https://via.placeholder.com/400x400.png?text=Chapter+3"
+    },
+    {
+      "startTime": 3600,
+      "title": "Part 3: Practical Application",
+      "img": "https://via.placeholder.com/400x400.png?text=Chapter+4"
+    },
+    {
+      "startTime": 5400,
+      "title": "Conclusion",
+      "img": "https://via.placeholder.com/400x400.png?text=Chapter+5"
+    }
+  ]
+}
